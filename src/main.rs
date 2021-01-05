@@ -1,3 +1,6 @@
+mod diceware;
+mod utils;
+
 fn main() {
-    println!("Hello, world!");
+    diceware::process();
 }
