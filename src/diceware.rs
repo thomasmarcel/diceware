@@ -1,3 +1,5 @@
+use rand::Rng;
+
 use crate::utils::read_lines;
 
 #[derive(Debug)]
@@ -23,4 +25,16 @@ pub fn process() -> () {
 		}
 	}
 	println!("{:?}", dict);
+	for _i in 0..20 {
+		println!("{:?}", roll_dice(6));
+	}
+}
+
+fn roll_dice(times: u8) -> String {
+	let mut s = String::new();
+	for _time in 0..times {
+		let number: u32 = rand::thread_rng().gen_range(1..7);
+		s += &number.to_string();
+	}
+	s
 }
