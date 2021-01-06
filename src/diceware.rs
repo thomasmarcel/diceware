@@ -9,6 +9,30 @@ struct WordDict {
 }
 
 pub fn process() -> () {
+	let word_num = 2;
+
+	let special_chars = vec![
+		"#",
+		"-",
+		"@",
+		"=",
+		"+", 
+		"%",
+		"*",
+		"?",
+		":",
+		".",
+		"!",
+		"&",
+		"$"
+	];
+
+	let mut selected_special_chars: Vec<String> = Vec::new();
+	for _n in 0..(word_num - 1) {
+		let i = rand::thread_rng().gen_range(0..special_chars.len());
+		selected_special_chars.push(String::from(special_chars[i]));
+	}
+
 	let mut dict: Vec<WordDict> = Vec::new();
 	if let Ok(lines) = read_lines("diceware.wordlist.asc") {
 		for line in lines {
@@ -25,9 +49,12 @@ pub fn process() -> () {
 		}
 	}
 	println!("{:?}", dict);
-	for _i in 0..20 {
-		println!("{:?}", roll_dice(6));
+	let mut word_dices: Vec<String> = Vec::new();
+	for _i in 0..word_num {
+		word_dices.push(roll_dice(6));
 	}
+	println!("{:?}", word_dices);
+	println!("{:?}", selected_special_chars);
 }
 
 fn roll_dice(times: u8) -> String {
