@@ -57,11 +57,27 @@ pub fn process() -> () {
 	println!("{:?}", dict);
 	let mut word_dices: Vec<String> = Vec::new();
 	for _i in 0..word_num {
-		word_dices.push(roll_dice(6));
+		word_dices.push(roll_dice(5));
 	}
-	println!("{:?}", word_dices);
-	println!("{:?}", selected_special_chars);
-	println!("{:?}", rand_nums);
+
+	let mut words_found = 0;
+	let mut index = 0;
+	let mut words: Vec<String> = Vec::new();
+	while words_found < word_dices.len() && index < dict.len() {
+		let cur_word = &dict[index];
+		for dices in &word_dices {
+			if cur_word.dices == *dices {
+				words.push(String::from(&cur_word.word));
+				words_found += 1;
+			}
+		}
+		index += 1;
+	}
+
+	println!("{:?}", &word_dices);
+	println!("{:?}", &selected_special_chars);
+	println!("{:?}", &rand_nums);
+	println!("{:?}", &words);
 }
 
 fn roll_dice(times: u8) -> String {
