@@ -63,13 +63,27 @@ pub fn process() -> () {
 	let mut words_found = 0;
 	let mut index = 0;
 	let mut words: Vec<String> = Vec::new();
+	let first_word_upcase: bool = rand::thread_rng().gen_bool(0.5);
+
 	while words_found < word_dices.len() && index < dict.len() {
 		let cur_word = &dict[index];
+		let mut first_word = true;
 		for dices in &word_dices {
 			if cur_word.dices == *dices {
-				words.push(String::from(&cur_word.word));
+				let word = match first_word_upcase {
+					true => match first_word {
+						true => String::from(&cur_word.word).to_uppercase(),
+						false => String::from(&cur_word.word)
+					},
+					false => match first_word {
+						true => String::from(&cur_word.word),
+						false => String::from(&cur_word.word).to_uppercase()
+					},
+				};
+				words.push(word);
 				words_found += 1;
 			}
+			first_word = false;
 		}
 		index += 1;
 	}
@@ -78,6 +92,8 @@ pub fn process() -> () {
 	println!("{:?}", &selected_special_chars);
 	println!("{:?}", &rand_nums);
 	println!("{:?}", &words);
+
+	println!("{}{}{}{}", &words[0], &rand_nums[0], &words[1], &selected_special_chars[0]);
 }
 
 fn roll_dice(times: u8) -> String {
