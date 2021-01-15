@@ -46605,13 +46605,13 @@ pub fn dict() -> Vec<WordDict> {
         {
             WordDict {
                 dices: String::from("66653"),
-                word: String::from("Cargo.lock"),
+                word: String::from("*"),
             }
         },
         {
             WordDict {
                 dices: String::from("66654"),
-                word: String::from("Cargo.lock"),
+                word: String::from("**"),
             }
         },
         {
