@@ -1,12 +1,13 @@
 use rand::Rng;
 
-use crate::utils::read_lines;
+use crate::dict::dict;
+// use crate::utils::read_lines;
 
-#[derive(Debug)]
-struct WordDict {
-    dices: String,
-    word: String,
-}
+// #[derive(Debug)]
+// struct WordDict {
+//     dices: String,
+//     word: String,
+// }
 
 pub fn process() -> () {
     let word_num = 2;
@@ -27,22 +28,23 @@ pub fn process() -> () {
         rand_nums.push(rand_num);
     }
 
-    let mut dict: Vec<WordDict> = Vec::new();
-    if let Ok(lines) = read_lines("diceware.wordlist.asc") {
-        for line in lines {
-            if let Ok(row) = line {
-                let row_list: Vec<&str> = row.split('\t').collect();
-                if row_list.len() == 2 {
-                    let row_dict = WordDict {
-                        dices: String::from(row_list[0]),
-                        word: String::from(row_list[1]),
-                    };
-                    dict.push(row_dict);
-                }
-            }
-        }
-    }
+    // let mut dict: Vec<WordDict> = Vec::new();
+    // if let Ok(lines) = read_lines("diceware.wordlist.asc") {
+    //     for line in lines {
+    //         if let Ok(row) = line {
+    //             let row_list: Vec<&str> = row.split('\t').collect();
+    //             if row_list.len() == 2 {
+    //                 let row_dict = WordDict {
+    //                     dices: String::from(row_list[0]),
+    //                     word: String::from(row_list[1]),
+    //                 };
+    //                 dict.push(row_dict);
+    //             }
+    //         }
+    //     }
+    // }
     // println!("{:?}", dict);
+    let dict = dict();
     let mut word_dices: Vec<String> = Vec::new();
     for _i in 0..word_num {
         word_dices.push(roll_dice(5));
